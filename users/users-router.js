@@ -4,6 +4,10 @@ const Users = require('./users-model.js');
 const restricted = require('../auth/restricted-middleware.js');
 // const checkRole = require('../auth/check-role-middleware');
 
+// router.get('/', (req, res) => {
+//     res.status(200).json({message: `user route working`})
+// });
+
 router.get('/', restricted, (req, res) => {
   Users.find()
     .then(users => {

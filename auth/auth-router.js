@@ -5,7 +5,12 @@ const secret = require('../config/default');
 
 const Users = require('../users/users-model.js');
 
-// for endpoints beginning with /api/auth
+// for endpoints beginning with /api/
+
+router.get('/', (req, res) => {
+    res.status(200).json({message: `register/login routes working`})
+});
+
 router.post('/register', (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
