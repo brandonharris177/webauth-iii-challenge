@@ -4,7 +4,7 @@ const secret = require('../config/default');
 
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
-  console.log(`token ${token}`)
+  // console.log(`token ${token}`)
 
   if(token) {
     jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
         //valid
         res.user = {
           username: decodedToken.username
-          , role: decodedToken.role
+          , department: decodedToken.department
         };
         next()
       }

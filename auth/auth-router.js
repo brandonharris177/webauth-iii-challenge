@@ -7,12 +7,9 @@ const Users = require('../users/users-model.js');
 
 // for endpoints beginning with /api/
 
-router.get('/', (req, res) => {
-    res.status(200).json({message: `register/login routes working`})
-});
-
 router.post('/register', (req, res) => {
   let user = req.body;
+  console.log(user)
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
   user.password = hash;
 
@@ -21,7 +18,7 @@ router.post('/register', (req, res) => {
       res.status(201).json(saved);
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(500).json({message: `this error`, error});
     });
 });
 
@@ -50,7 +47,7 @@ function generateToken(user) {
   const payload = {
     username: user.username
     , subject: user.id
-    , role: user.role
+    , department: user.department
   };
   
   const options = {

@@ -2,13 +2,9 @@ const router = require('express').Router();
 
 const Users = require('./users-model.js');
 const restricted = require('../auth/restricted-middleware.js');
-// const checkRole = require('../auth/check-role-middleware');
+const checkDepartment = require('../auth/check-department-middleware');
 
-// router.get('/', (req, res) => {
-//     res.status(200).json({message: `user route working`})
-// });
-
-router.get('/', restricted, (req, res) => {
+router.get('/', restricted, checkDepartment('admin'), (req, res) => {
   Users.find()
     .then(users => {
       res.json({loggedInUser: req.username, users});
